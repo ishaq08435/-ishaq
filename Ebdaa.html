@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مهارات التفكير الإبداعي | المكتبة الإلكترونية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0d1b1e;
+            --primary-green: #1a3c34;
+            --accent-gold: #c5a059;
+            --text-light: #f4f4f4;
+            --card-bg: rgba(26, 60, 52, 0.4);
+            --letter-opacity: 0.15;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        /* شريط الإشراف العلوي الثابت */
+        .school-header {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 2000;
+        }
+
+        .school-name {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        /* أزرار التحكم العائمة */
+        .nav-controls {
+            position: fixed; bottom: 30px; left: 30px;
+            display: flex; gap: 15px; z-index: 1001;
+        }
+
+        .ctrl-btn {
+            width: 55px; height: 55px;
+            background: var(--accent-gold);
+            color: var(--primary-green);
+            border: none; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; transition: 0.3s; text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        }
+        .ctrl-btn:hover { transform: scale(1.1) rotate(-10deg); }
+
+        /* خلفية الحروف العربية */
+        .arabic-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; display: flex; flex-wrap: wrap;
+            justify-content: space-around; align-content: space-around;
+            pointer-events: none; opacity: var(--letter-opacity);
+        }
+        .bg-letter {
+            font-family: 'Amiri', serif;
+            font-size: 100px; font-weight: 900; color: var(--accent-gold);
+            filter: blur(1px); animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1) rotate(0deg); opacity: 0.2; }
+            to { transform: scale(1.2) rotate(15deg); opacity: 0.5; }
+        }
+
+        /* ترويسة القسم */
+        header.skills-header {
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), transparent);
+        }
+
+        header h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem; color: #fff; margin: 0;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.6);
+        }
+
+        header p { font-size: 1.4rem; color: var(--accent-gold); margin-top: 15px; font-weight: 300; }
+
+        /* حاوية البطاقات */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; padding: 0 20px 100px;
+            max-width: 1200px; margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 25px; padding: 40px 25px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            display: flex; flex-direction: column;
+            align-items: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-15px);
+            background: rgba(26, 60, 52, 0.7);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .skill-card .icon { 
+            font-size: 55px; margin-bottom: 20px; display: block; 
+            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
+        }
+
+        .skill-card h4 { 
+            color: var(--accent-gold); 
+            font-family: 'Amiri', serif;
+            font-size: 1.8em; margin: 0 0 15px 0; 
+        }
+
+        .skill-card p { 
+            line-height: 1.8; color: var(--text-light); 
+            font-size: 1.05em; margin: 0; opacity: 0.9;
+        }
+
+        footer {
+            padding: 50px 20px; text-align: center;
+            background: rgba(0,0,0,0.4); border-top: 2px solid var(--accent-gold);
+            font-family: 'Amiri', serif; font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="school-header">
+        <p class="school-name">بإشراف: مدرسة خالد بن الوليد الثانوية - لواء الموقر</p>
+    </header>
+
+    <div class="nav-controls">
+        <a href="index.html" class="ctrl-btn" title="الرئيسية">🏠</a>
+        <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل الوضع">🌙</button>
+    </div>
+
+    <div class="arabic-bg" id="arabicBg"></div>
+
+    <header class="skills-header">
+        <h1>💡 مهارات التفكير الإبداعي</h1>
+        <p>طوّر أدواتك الذهنية وحلّل المحتوى بأسلوب المبدعين</p>
+    </header>
+
+    <div class="skills-container">
+        <div class="skill-card">
+            <span class="icon">💡</span>
+            <h4>الطلاقة</h4>
+            <p>القدرة على استدعاء وتوليد أكبر عدد ممكن من الأفكار البديلة والحلول المتنوعة في وقت قياسي.</p>
+        </div>
+        <div class="skill-card">
+            <span class="icon">🔄</span>
+            <h4>المرونة</h4>
+            <p>تغيير مسار التفكير حسب الموقف، والتحرر من القوالب الجاهزة لرؤية النصوص من زوايا مختلفة.</p>
+        </div>
+        <div class="skill-card">
+            <span class="icon">✨</span>
+            <h4>الأصالة</h4>
+            <p>إنتاج أفكار نادرة وغير مألوفة تتجاوز التقليد وتضع بصمة إبداعية فريدة على كل ما تقرأ.</p>
+        </div>
+        <div class="skill-card">
+            <span class="icon">🔍</span>
+            <h4>التوسع</h4>
+            <p>إثراء الفكرة البسيطة بالتفاصيل الدقيقة والوصف العميق الذي يجعل منها بناءً متكاملاً ومبهراً.</p>
+        </div>
+        <div class="skill-card">
+            <span class="icon">⚠️</span>
+            <h4>الحساسية للمشكلات</h4>
+            <p>توقع العقد الدرامية قبل وقوعها، ورصد الثغرات في الحبكة التي لا يلاحظها القارئ العادي.</p>
+        </div>
+        <div class="skill-card">
+            <span class="icon">🛠️</span>
+            <h4>إعادة التعرّف</h4>
+            <p>استخدام الأدوات أو الشخصيات المتاحة في النصوص بطرق مبتكرة لحل الأزمات وتغيير مجرى السرد.</p>
+        </div>
+        <div class="skill-card">
+            <span class="icon">🧠</span>
+            <h4>الربط البعيد</h4>
+            <p>القدرة على ربط أحداث متباعدة أو دمج مفاهيم متناقضة لخلق مفاجآت درامية وفكرية مذهلة.</p>
+        </div>
+        <div class="skill-card">
+            <span class="icon">🖼️</span>
+            <h4>التخيل البصري</h4>
+            <p>بناء صور ذهنية حية للمشاهد، مما يسهل عملية استيعاب وصياغة الأحداث بأسلوب جذاب.</p>
+        </div>
+    </div>
+
+    <footer>
+        المكتبة الإلكترونية &copy; 2026 | مدرسة خالد بن الوليد الثانوية
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeBtn');
+            body.classList.toggle('light-mode');
+            btn.innerText = body.classList.contains('light-mode') ? "🌙" : "☀️";
+        }
+
+        const bgContainer = document.getElementById('arabicBg');
+        const letters = "أبتثجحخدذرزسشصضطظعغفقكلمنهوي";
+        for (let i = 0; i < 60; i++) {
+            let letter = document.createElement('div');
+            letter.className = 'bg-letter';
+            letter.innerText = letters[Math.floor(Math.random() * letters.length)];
+            letter.style.left = (Math.random() * 100) + 'vw';
+            letter.style.top = (Math.random() * 100) + 'vh';
+            letter.style.animationDelay = (Math.random() * 5) + 's';
+            bgContainer.appendChild(letter);
+        }
+    </script>
+</body>
+</html>

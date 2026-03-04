@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم القصص | المكتبة الإلكترونية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0d1b1e;
+            --primary-green: #1a3c34;
+            --accent-gold: #c5a059;
+            --text-light: #f4f4f4;
+            --card-bg: rgba(26, 60, 52, 0.4);
+            --letter-opacity: 0.15;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden; min-height: 100vh;
+        }
+
+        /* شريط الإشراف العلوي */
+        .school-header {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 2000;
+        }
+
+        .school-name {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        /* زر الرجوع العائم */
+        .back-home {
+            position: fixed;
+            bottom: 30px; left: 30px;
+            width: 55px; height: 55px;
+            background: var(--accent-gold);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 1.5rem;
+            z-index: 1001; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .back-home:hover { transform: scale(1.1) rotate(-10deg); }
+
+        /* منطقة البحث */
+        .header-content {
+            padding: 130px 20px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3.2rem; color: #fff; margin: 0;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .search-box {
+            margin-top: 30px;
+            position: relative;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 2px solid var(--accent-gold);
+            background: rgba(255, 255, 255, 0.05);
+            color: white; font-size: 1.1rem;
+            outline: none; backdrop-filter: blur(5px);
+            text-align: center; transition: 0.3s;
+        }
+        .search-input:focus { background: rgba(255, 255, 255, 0.1); box-shadow: 0 0 15px rgba(197, 160, 89, 0.3); }
+
+        /* حاوية القصص */
+        .stories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto 100px;
+        }
+
+        .story-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 30px;
+            transition: 0.4s;
+            display: flex; flex-direction: column;
+        }
+
+        .story-card:hover { transform: translateY(-10px); border-color: var(--accent-gold); background: rgba(26, 60, 52, 0.6); }
+
+        .story-card h3 { 
+            color: var(--accent-gold); 
+            font-family: 'Amiri', serif; 
+            font-size: 1.8rem; margin-top: 0; 
+        }
+
+        .story-card p { color: var(--text-light); opacity: 0.9; line-height: 1.7; flex-grow: 1; }
+
+        .tags { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--accent-gold);
+            padding: 4px 12px; border-radius: 50px; font-size: 0.85rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .read-btn {
+            display: block; text-align: center;
+            margin-top: 25px; padding: 12px;
+            background: transparent;
+            color: var(--accent-gold);
+            text-decoration: none; border: 2px solid var(--accent-gold);
+            border-radius: 50px; font-weight: bold; transition: 0.3s;
+        }
+        .read-btn:hover { background: var(--accent-gold); color: var(--primary-green); }
+
+        /* خلفية الحروف */
+        .arabic-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; display: flex; flex-wrap: wrap;
+            justify-content: space-around; align-content: space-around;
+            pointer-events: none; opacity: var(--letter-opacity);
+        }
+        .bg-letter {
+            font-family: 'Amiri', serif; font-size: 80px; 
+            color: var(--accent-gold); filter: blur(1px);
+            animation: pulse 6s infinite alternate;
+        }
+        @keyframes pulse { from { opacity: 0.2; } to { opacity: 0.6; } }
+
+        footer {
+            padding: 40px; text-align: center;
+            background: rgba(0,0,0,0.3); border-top: 2px solid var(--accent-gold);
+            font-family: 'Amiri', serif; font-size: 1.4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="school-header">
+        <p class="school-name">بإشراف: مدرسة خالد بن الوليد الثانوية - لواء الموقر</p>
+    </header>
+
+    <a href="index.html" class="back-home" title="الرئيسية">🏠</a>
+
+    <div class="arabic-bg" id="arabicBg"></div>
+
+    <div class="header-content">
+        <h1>📖 عالم القصص والروايات</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن قصة أو تصنيف..." onkeyup="filterStories()">
+        </div>
+    </div>
+
+    <div class="stories-container" id="storiesList">
+        <div class="story-card">
+            <h3>مغامرة في الفضاء</h3>
+            <p>رحلة خيالية تتحدث عن استكشاف الكواكب البعيدة والحياة خارج الأرض بأسلوب علمي مشوق.</p>
+            <div class="tags">
+                <span class="tag">خيال</span>
+                <span class="tag">فضاء</span>
+                <span class="tag">علوم</span>
+            </div>
+            <a href="https://drive.google.com/file/d/1TpHpJMUUBTBzu-SjBWsSHALD-JmRNVMr/view?usp=drivesdk" class="read-btn">اقرأ الآن</a>
+        </div>
+
+        <div class="story-card">
+            <h3>سر الواحة المفقودة</h3>
+            <p>قصة مشوقة عن رحالة يبحث عن واحة غامضة وسط الصحراء العربية تخفي أسراراً قديمة.</p>
+            <div class="tags">
+                <span class="tag">مغامرة</span>
+                <span class="tag">تشويق</span>
+                <span class="tag">تاريخ</span>
+            </div>
+            <a href="https://drive.google.com/file/d/18edNrz8yF5OerbCVegXbLOpCqsFwsxzh/view?usp=drivesdk" class="read-btn">اقرأ الآن</a>
+        </div>
+
+        <div class="story-card">
+            <h3>حكايات الجدة</h3>
+            <p>مجموعة من الحكم والمواعظ القديمة الموروثة من الأجداد بأسلوب ممتع يجمع الأصالة بالعبرة.</p>
+            <div class="tags">
+                <span class="tag">حكم</span>
+                <span class="tag">تراث</span>
+                <span class="tag">أطفال</span>
+            </div>
+            <a href="https://drive.google.com/file/d/1W4tOwRsZVazpFqwDu5lVxSQ-yXV0_8lM/view?usp=drivesdk" class="read-btn">اقرأ الآن</a>
+        </div>
+
+        <div class="story-card">
+            <h3>الذكاء الاصطناعي 2050</h3>
+            <p>رؤية مستقبلية لصراع البشر مع الآلات في مدن ذكية متطورة وكيف ستكون الحياة حينها.</p>
+            <div class="tags">
+                <span class="tag">تقنية</span>
+                <span class="tag">مستقبل</span>
+                <span class="tag">خيال علمي</span>
+            </div>
+            <a href="https://drive.google.com/file/d/13Av-9TEdS5pm5K6tYEGNDHBO29CJSXmU/view?usp=drivesdk" class="read-btn">اقرأ الآن</a>
+        </div>
+    </div>
+
+    <footer>
+        المكتبة الإلكترونية &copy; 2026 | مدرسة خالد بن الوليد الثانوية
+    </footer>
+
+    <script>
+        function filterStories() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('story-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let text = cards[i].innerText.toLowerCase();
+                cards[i].style.display = text.includes(input) ? "" : "none";
+            }
+        }
+
+        const bgContainer = document.getElementById('arabicBg');
+        const letters = "أبتثجحخدذرزسشصضطظعغفقكلمنهوي";
+        for (let i = 0; i < 60; i++) {
+            let letter = document.createElement('div');
+            letter.className = 'bg-letter';
+            letter.innerText = letters[Math.floor(Math.random() * letters.length)];
+            letter.style.left = (Math.random() * 100) + 'vw';
+            letter.style.top = (Math.random() * 100) + 'vh';
+            letter.style.animationDelay = (Math.random() * 5) + 's';
+            bgContainer.appendChild(letter);
+        }
+    </script>
+
+</body>
+</html>

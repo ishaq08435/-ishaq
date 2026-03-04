@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة إيوان الضاد الإلكترونية | مدرسة خالد بن الوليد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a3c34; 
+            --accent-color: #c5a059;  
+            --text-light: #f4f4f4;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0d1b1e;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* شريط الإشراف العلوي */
+        .school-header {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .school-name {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* خلفية الواجهة */
+        .hero-section {
+            background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(13, 27, 30, 0.95)), 
+                        url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+        }
+
+        .sub-text {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        /* صندوق الشعر */
+        .poetry-box {
+            max-width: 800px;
+            margin: 20px 0;
+            border-right: 5px solid var(--accent-color);
+            padding: 25px 40px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 0 20px 20px 0;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        }
+
+        .poetry-line {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            line-height: 1.8;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        /* زر الدخول */
+        .enter-btn {
+            margin-top: 40px;
+            padding: 18px 65px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #1a3c34, #2c5e52);
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        }
+
+        .enter-btn:hover {
+            background: var(--accent-color);
+            color: #1a3c34;
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.4);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="school-header">
+        <p class="school-name">بإشراف: مدرسة خالد بن الوليد الثانوية - لواء الموقر</p>
+    </header>
+
+    <section class="hero-section">
+        <div class="logo">مكتبة إيوان الضاد الإلكترونية</div>
+        <p class="sub-text">صرحُ المعرفةِ بلسانٍ عربيٍّ مبين</p>
+        
+        <div class="poetry-box">
+            <p class="poetry-line">
+                إِنَّ الَّذي مَلأَ اللُغاتِ مَحاسِناً <br>
+                جَعَلَ الجَمالَ وَسِرَّهُ في الضادِ
+            </p>
+        </div>
+
+        <a href="abcdaa.html" class="enter-btn">دخول الموقع</a>
+
+        <footer>
+            جميع الحقوق محفوظة مكتبة الضاد الإلكترونية &copy; 2026 | مدرسة خالد بن الوليد
+        </footer>
+    </section>
+
+</body>
+</html>

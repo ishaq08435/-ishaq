@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدواوين الشعرية | المكتبة الإلكترونية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0d1b1e;
+            --primary-green: #1a3c34;
+            --accent-gold: #c5a059;
+            --text-light: #f4f4f4;
+            --card-bg: rgba(26, 60, 52, 0.4);
+            --letter-opacity: 0.15;
+        }
+
+        .light-mode {
+            --bg-dark: #f0f4f2;
+            --primary-green: #2c5e52;
+            --accent-gold: #a68545;
+            --text-light: #1a3c34;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --letter-opacity: 0.1;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        /* شريط الإشراف العلوي الثابت */
+        .school-header {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 2000;
+        }
+
+        .school-name {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        /* أزرار التحكم العائمة */
+        .nav-controls {
+            position: fixed; bottom: 30px; left: 30px;
+            display: flex; gap: 15px; z-index: 1001;
+        }
+
+        .ctrl-btn {
+            width: 50px; height: 50px;
+            background: var(--accent-gold);
+            color: var(--primary-green);
+            border: none; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; transition: 0.3s; text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .ctrl-btn:hover { transform: scale(1.1) rotate(15deg); }
+
+        /* خلفية الحروف العربية */
+        .arabic-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; display: flex; flex-wrap: wrap;
+            justify-content: space-around; align-content: space-around;
+            pointer-events: none; opacity: var(--letter-opacity);
+        }
+        .bg-letter {
+            font-family: 'Amiri', serif;
+            font-size: 80px; font-weight: 900; color: var(--accent-gold);
+            filter: blur(1px); animation: pulse 6s infinite alternate;
+        }
+
+        @keyframes pulse { from { opacity: 0.2; transform: translateY(0); } to { opacity: 0.5; transform: translateY(-20px); } }
+
+        header {
+            padding: 130px 20px 50px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), transparent);
+        }
+
+        header h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem; color: #fff; margin: 0;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.6);
+        }
+
+        header p { font-size: 1.3rem; color: var(--accent-gold); margin-top: 10px; }
+
+        /* حاوية الدواوين */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto 100px;
+        }
+
+        .diwan-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 30px; padding: 35px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            display: flex; flex-direction: column;
+        }
+        
+        .diwan-card:hover { 
+            transform: translateY(-12px); 
+            border-color: var(--accent-gold);
+            background: rgba(26, 60, 52, 0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .diwan-card h3 { 
+            color: var(--accent-gold); 
+            font-family: 'Amiri', serif; 
+            font-size: 1.9rem; margin-top: 0; 
+        }
+
+        .poet-name { 
+            color: #fff; font-weight: bold; font-size: 1.1rem; 
+            display: block; margin-bottom: 20px; opacity: 0.8;
+        }
+        
+        .verse-preview {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem; line-height: 1.8; color: #fff;
+            background: rgba(197, 160, 89, 0.1);
+            border-right: 4px solid var(--accent-gold);
+            padding: 20px; margin: 15px 0;
+            border-radius: 0 15px 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .card-desc { font-size: 0.95rem; line-height: 1.6; opacity: 0.85; flex-grow: 1; }
+
+        .open-btn {
+            display: inline-block; margin-top: 25px;
+            padding: 10px 35px; border: 2px solid var(--accent-gold);
+            color: var(--accent-gold); text-decoration: none;
+            border-radius: 50px; font-weight: bold; transition: 0.3s;
+        }
+        .open-btn:hover { background: var(--accent-gold); color: var(--primary-green); }
+
+        footer {
+            padding: 50px 20px; text-align: center;
+            background: rgba(0,0,0,0.3); border-top: 2px solid var(--accent-gold);
+            font-family: 'Amiri', serif; font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="school-header">
+        <p class="school-name">بإشراف: مدرسة خالد بن الوليد الثانوية - لواء الموقر</p>
+    </header>
+
+    <div class="nav-controls">
+        <a href="index.html" class="ctrl-btn" title="الرئيسية">🏠</a>
+        <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل الوضع">🌙</button>
+    </div>
+
+    <div class="arabic-bg" id="arabicBg"></div>
+
+    <header>
+        <h1>📜 الدواوين الشعرية</h1>
+        <p>ديوان العرب وسجل أمجادهم الخالد بلسانٍ عربيٍّ مبين</p>
+    </header>
+
+    <div class="container">
+        <div class="diwan-card">
+            <h3>ديوان المتنبي</h3>
+            <span class="poet-name">أبو الطيب المتنبي</span>
+            <div class="verse-preview">
+                عَلى قَدْرِ أهْلِ العَزْم تأتي العَزائِمُ <br>
+                وَتأتي عَلى قَدْرِ الكِرامِ المَكارِمُ
+            </div>
+            <p class="card-desc">أقوى قصائد الفخر والحكمة والطموح التي صاغها مالئ الدنيا وشاغل الناس.</p>
+            <a href="https://drive.google.com/file/d/1Zhp9F0WB9kfKPGSvKraHxwq-OA9wneww/view?usp=drivesdk" class="open-btn">تصفح القصائد</a>
+        </div>
+
+        <div class="diwan-card">
+            <h3>ديوان امرؤ القيس</h3>
+            <span class="poet-name">ملك الشعراء في الجاهلية</span>
+            <div class="verse-preview">
+                قِفا نَبكِ مِن ذِكرى حَبيبٍ وَمَنزِلِ <br>
+                بِسِقطِ اللِوى بَينَ الدَخولِ فَحَومَلِ
+            </div>
+            <p class="card-desc">صاحب أول معلقة عُلقت على أستار الكعبة، وأمير شعراء العصر الجاهلي.</p>
+            <a href="https://drive.google.com/file/d/1NRC6CVVZ9YRcIq74RQt_lQu006xhlWWv/view?usp=drivesdk" class="open-btn">تصفح القصائد</a>
+        </div>
+
+        <div class="diwan-card">
+            <h3>ديوان الإمام الشافعي</h3>
+            <span class="poet-name">الإمام محمد بن إدريس الشافعي</span>
+            <div class="verse-preview">
+                دَعِ الأَيَّامَ تَفْعَلُ مَا تَشَاءُ <br>
+                وَطِبْ نَفْساً إِذَا حَكَمَ القَضَاءُ
+            </div>
+            <p class="card-desc">أشعارٌ تجمع بين الزهد، الأدب، وعمق الحكمة المستخلصة من تجارب الإمام.</p>
+            <a href="https://drive.google.com/file/d/10Pj286UDhUWlfZFLwVTEiqvE6ITH2q07/view?usp=drivesdk" class="open-btn">تصفح القصائد</a>
+        </div>
+
+        <div class="diwan-card">
+            <h3>ديوان الشوقيات</h3>
+            <span class="poet-name">أمير الشعراء أحمد شوقي</span>
+            <div class="verse-preview">
+                قُم لِلمُعَلِّمِ وَفِّهِ التَبجيلا <br>
+                كادَ المُعَلِّمُ أَن يَكونَ رَسولا
+            </div>
+            <p class="card-desc">رائعة الشعر العربي الحديث، تمزج بين الوطنية، الدين، والقضايا الاجتماعية.</p>
+            <a href="https://drive.google.com/file/d/1IcKIfTmOpPagqfD8eNyiDkpP8tRQWmSD/view?usp=drivesdk" class="open-btn">تصفح القصائد</a>
+        </div>
+
+        <div class="diwan-card">
+            <h3>ديوان عنترة</h3>
+            <span class="poet-name">فارس بني عبس عنترة بن شداد</span>
+            <div class="verse-preview">
+                سَيَذكُرُني قَومي إِذا جَدَّ جِدُّهُم <br>
+                وَفي اللَيفَةِ الظَلماءِ يُفتَقَدُ البَدرُ
+            </div>
+            <p class="card-desc">شعر الفروسية، الشجاعة، والأنفة الممتزجة بعشق "عبلة" العفيف الخالد.</p>
+            <a href="https://drive.google.com/file/d/1s3soVztG1LxHshn0JdXBJb7xsQrewkJO/view?usp=drivesdk" class="open-btn">تصفح القصائد</a>
+        </div>
+
+        <div class="diwan-card">
+            <h3>ديوان محمود درويش</h3>
+            <span class="poet-name">شاعر الأرض والوطن</span>
+            <div class="verse-preview">
+                عَلى هَذِهِ الأَرْضِ مَا يَسْتَحِقُّ الحَياةْ <br>
+                تَرَدُّدُ إِبْريلَ، رَائِحَةُ الخُبْزِ فِي الفَجْرِ
+            </div>
+            <p class="card-desc">رمز الحداثة الشعرية والمقاومة، وصاحب الكلمات التي هزت وجدان الأمة.</p>
+            <a href="https://drive.google.com/file/d/1sNAeZUrQzgJ-FXkGwiskHPpCAh4Vn1F-/view?usp=drivesdk" class="open-btn">تصفح القصائد</a>
+        </div>
+    </div>
+
+    <footer>
+        المكتبة الإلكترونية &copy; 2026 | مدرسة خالد بن الوليد الثانوية
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeBtn');
+            body.classList.toggle('light-mode');
+            btn.innerText = body.classList.contains('light-mode') ? "🌙" : "☀️";
+        }
+
+        const bgContainer = document.getElementById('arabicBg');
+        const letters = "أبتثجحخدذرزسشصضطظعغفقكلمنهوي";
+        for (let i = 0; i < 60; i++) {
+            let letter = document.createElement('div');
+            letter.className = 'bg-letter';
+            letter.innerText = letters[Math.floor(Math.random() * letters.length)];
+            letter.style.left = (Math.random() * 100) + 'vw';
+            letter.style.top = (Math.random() * 100) + 'vh';
+            letter.style.animationDelay = (Math.random() * 6) + 's';
+            bgContainer.appendChild(letter);
+        }
+    </script>
+</body>
+</html>

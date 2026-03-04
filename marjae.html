@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مهارات التفكير الإبداعي | المكتبة الإلكترونية</title>
+    <title>المراجع اللغوية | المكتبة الإلكترونية</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,6 +13,15 @@
             --text-light: #f4f4f4;
             --card-bg: rgba(26, 60, 52, 0.4);
             --letter-opacity: 0.15;
+        }
+
+        .light-mode {
+            --bg-dark: #f0f4f2;
+            --primary-green: #2c5e52;
+            --accent-gold: #a68545;
+            --text-light: #1a3c34;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --letter-opacity: 0.1;
         }
 
         body {
@@ -52,15 +61,15 @@
         }
 
         .ctrl-btn {
-            width: 55px; height: 55px;
+            width: 50px; height: 50px;
             background: var(--accent-gold);
             color: var(--primary-green);
             border: none; border-radius: 50%;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; transition: 0.3s; text-decoration: none;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            font-size: 1.3rem; transition: 0.3s; text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .ctrl-btn:hover { transform: scale(1.1) rotate(-10deg); }
+        .ctrl-btn:hover { transform: scale(1.1) rotate(10deg); }
 
         /* خلفية الحروف العربية */
         .arabic-bg {
@@ -71,18 +80,14 @@
         }
         .bg-letter {
             font-family: 'Amiri', serif;
-            font-size: 100px; font-weight: 900; color: var(--accent-gold);
-            filter: blur(1px); animation: pulse 8s infinite alternate;
+            font-size: 90px; color: var(--accent-gold);
+            filter: blur(1px); animation: pulse 7s infinite alternate;
         }
 
-        @keyframes pulse {
-            from { transform: scale(1) rotate(0deg); opacity: 0.2; }
-            to { transform: scale(1.2) rotate(15deg); opacity: 0.5; }
-        }
+        @keyframes pulse { from { opacity: 0.2; transform: scale(1); } to { opacity: 0.5; transform: scale(1.2); } }
 
-        /* ترويسة القسم */
-        header.skills-header {
-            padding: 140px 20px 60px;
+        header.main-header {
+            padding: 130px 20px 60px;
             text-align: center;
             background: linear-gradient(to bottom, rgba(0,0,0,0.2), transparent);
         }
@@ -93,53 +98,54 @@
             text-shadow: 0 5px 20px rgba(0,0,0,0.6);
         }
 
-        header p { font-size: 1.4rem; color: var(--accent-gold); margin-top: 15px; font-weight: 300; }
+        header p { font-size: 1.3rem; color: var(--accent-gold); margin-top: 10px; }
 
-        /* حاوية البطاقات */
-        .skills-container {
+        /* حاوية المراجع */
+        .references-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px; padding: 0 20px 100px;
-            max-width: 1200px; margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto 100px;
         }
 
-        .skill-card {
+        .ref-card {
             background: var(--card-bg);
             backdrop-filter: blur(15px);
-            border-radius: 25px; padding: 40px 25px;
+            border-radius: 25px; padding: 40px 30px;
             border: 1px solid rgba(197, 160, 89, 0.2);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s;
             text-align: center;
             display: flex; flex-direction: column;
-            align-items: center;
+            position: relative;
         }
 
-        .skill-card:hover {
-            transform: translateY(-15px);
-            background: rgba(26, 60, 52, 0.7);
+        .ref-card:hover { 
+            transform: translateY(-12px); 
             border-color: var(--accent-gold);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            background: rgba(26, 60, 52, 0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        .skill-card .icon { 
-            font-size: 55px; margin-bottom: 20px; display: block; 
-            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
-        }
-
-        .skill-card h4 { 
+        .ref-icon { font-size: 50px; margin-bottom: 20px; display: block; filter: sepia(1) saturate(2); }
+        
+        .ref-card h3 { 
             color: var(--accent-gold); 
-            font-family: 'Amiri', serif;
-            font-size: 1.8em; margin: 0 0 15px 0; 
+            font-family: 'Amiri', serif; 
+            font-size: 1.8rem; margin: 10px 0; 
         }
 
-        .skill-card p { 
-            line-height: 1.8; color: var(--text-light); 
-            font-size: 1.05em; margin: 0; opacity: 0.9;
+        .ref-card p { color: var(--text-light); opacity: 0.9; line-height: 1.7; font-size: 1.05rem; flex-grow: 1; }
+
+        .go-btn {
+            display: inline-block; margin-top: 25px;
+            padding: 12px 35px; border: 2px solid var(--accent-gold);
+            color: var(--accent-gold); text-decoration: none;
+            border-radius: 50px; font-weight: bold; transition: 0.3s;
         }
+        .go-btn:hover { background: var(--accent-gold); color: var(--primary-green); }
 
         footer {
             padding: 50px 20px; text-align: center;
-            background: rgba(0,0,0,0.4); border-top: 2px solid var(--accent-gold);
+            background: rgba(0,0,0,0.3); border-top: 2px solid var(--accent-gold);
             font-family: 'Amiri', serif; font-size: 1.5rem;
         }
     </style>
@@ -157,52 +163,48 @@
 
     <div class="arabic-bg" id="arabicBg"></div>
 
-    <header class="skills-header">
-        <h1>💡 مهارات التفكير الإبداعي</h1>
-        <p>طوّر أدواتك الذهنية وحلّل المحتوى بأسلوب المبدعين</p>
+    <header class="main-header">
+        <h1>🏛️ المراجع اللغوية</h1>
+        <p>ملاذُ الباحثين عن جوهر لغة الضاد وأصولها</p>
     </header>
 
-    <div class="skills-container">
-        <div class="skill-card">
-            <span class="icon">💡</span>
-            <h4>الطلاقة</h4>
-            <p>القدرة على استدعاء وتوليد أكبر عدد ممكن من الأفكار البديلة والحلول المتنوعة في وقت قياسي.</p>
+    <div class="references-container">
+        
+        <div class="ref-card">
+            <span class="ref-icon">📒</span>
+            <h3>قاموس المعاني</h3>
+            <p>مرجع عصري شامل للبحث عن معاني الكلمات، الترادفات، والأضداد اللغوية بدقة عالية.</p>
+            <a href="https://www.almaany.com/" class="go-btn">زيارة المرجع</a>
         </div>
-        <div class="skill-card">
-            <span class="icon">🔄</span>
-            <h4>المرونة</h4>
-            <p>تغيير مسار التفكير حسب الموقف، والتحرر من القوالب الجاهزة لرؤية النصوص من زوايا مختلفة.</p>
+
+        <div class="ref-card">
+            <span class="ref-icon">📜</span>
+            <h3>لسان العرب</h3>
+            <p>محيطُ اللغة لابن منظور، أكبر المعاجم العربية وأشملها، دستورُ لغتنا الخالد.</p>
+            <a href="https://www.lesanarab.com/" class="go-btn">زيارة المرجع</a>
         </div>
-        <div class="skill-card">
-            <span class="icon">✨</span>
-            <h4>الأصالة</h4>
-            <p>إنتاج أفكار نادرة وغير مألوفة تتجاوز التقليد وتضع بصمة إبداعية فريدة على كل ما تقرأ.</p>
+
+        <div class="ref-card">
+            <span class="ref-icon">🏛️</span>
+            <h3>مجمع اللغة العربية</h3>
+            <p>حارسُ الفصاحة، المرجع الرسمي للاصطلاحات الحديثة وقرارات التعريب واللغة.</p>
+            <a href="https://www.arabicacademy.gov.eg/" class="go-btn">زيارة المرجع</a>
         </div>
-        <div class="skill-card">
-            <span class="icon">🔍</span>
-            <h4>التوسع</h4>
-            <p>إثراء الفكرة البسيطة بالتفاصيل الدقيقة والوصف العميق الذي يجعل منها بناءً متكاملاً ومبهراً.</p>
+
+        <div class="ref-card">
+            <span class="ref-icon">📝</span>
+            <h3>الباحث العربي</h3>
+            <p>محرك بحث ذكي يغوص في أمهات القواميس (الصحاح، القاموس المحيط، ومقاييس اللغة).</p>
+            <a href="https://www.baheth.info/" class="go-btn">زيارة المرجع</a>
         </div>
-        <div class="skill-card">
-            <span class="icon">⚠️</span>
-            <h4>الحساسية للمشكلات</h4>
-            <p>توقع العقد الدرامية قبل وقوعها، ورصد الثغرات في الحبكة التي لا يلاحظها القارئ العادي.</p>
+
+        <div class="ref-card">
+            <span class="ref-icon">🎓</span>
+            <h3>مكتبة التراث</h3>
+            <p>منصة رقمية للمخطوطات والكتب اللغوية القديمة والنادرة التي شكلت تاريخ الأدب.</p>
+            <a href="#" class="go-btn">زيارة المرجع</a>
         </div>
-        <div class="skill-card">
-            <span class="icon">🛠️</span>
-            <h4>إعادة التعرّف</h4>
-            <p>استخدام الأدوات أو الشخصيات المتاحة في النصوص بطرق مبتكرة لحل الأزمات وتغيير مجرى السرد.</p>
-        </div>
-        <div class="skill-card">
-            <span class="icon">🧠</span>
-            <h4>الربط البعيد</h4>
-            <p>القدرة على ربط أحداث متباعدة أو دمج مفاهيم متناقضة لخلق مفاجآت درامية وفكرية مذهلة.</p>
-        </div>
-        <div class="skill-card">
-            <span class="icon">🖼️</span>
-            <h4>التخيل البصري</h4>
-            <p>بناء صور ذهنية حية للمشاهد، مما يسهل عملية استيعاب وصياغة الأحداث بأسلوب جذاب.</p>
-        </div>
+
     </div>
 
     <footer>
@@ -225,7 +227,7 @@
             letter.innerText = letters[Math.floor(Math.random() * letters.length)];
             letter.style.left = (Math.random() * 100) + 'vw';
             letter.style.top = (Math.random() * 100) + 'vh';
-            letter.style.animationDelay = (Math.random() * 5) + 's';
+            letter.style.animationDelay = (Math.random() * 7) + 's';
             bgContainer.appendChild(letter);
         }
     </script>
